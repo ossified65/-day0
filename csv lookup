@@ -1,0 +1,32 @@
+var data;
+var fruitData = [];
+
+// Create a FileReader object
+var reader = new FileReader();
+
+// Read the contents of the file
+reader.readAsText('fruit.csv');
+
+// Once the file has been read, store the contents in the data variable
+reader.onload = function(event) {
+  data = event.target.result;
+
+  // Split the data into lines
+  var lines = data.split("\n");
+
+  // Loop through each line
+  for (var i = 0; i < lines.length; i++) {
+    // Split the line into cells
+    var cells = lines[i].split(",");
+
+    // Add the fruit name and color to the fruitData array
+    fruitData[cells[0]] = cells[1];
+  }
+
+  // Display the fruit data in the browser
+  var content = "";
+  for (var fruit in fruitData) {
+    content += fruit + " is " + fruitData[fruit] + "<br>";
+  }
+  document.getElementById("output").innerHTML = content;
+};
